@@ -1,9 +1,10 @@
-RPM Comparision Report Between 2 Environments
+RPM Comparison Report Between 2 Environments
 ======
 
 Overview
 ------
 This script will generate a RPM comparision report between 2 similar Environments like (prod/preprod) based on thier ansible inventories.
+
 **Note: This script will not work if you have mismatching group names in the inventories.**
 
 ###Report Screenshot
@@ -11,7 +12,7 @@ This script will generate a RPM comparision report between 2 similar Environment
 
 [screenshot]:
 https://github.com/tuxfight3r/env_rpm_report/raw/master/reports/demo_screen.png
-"Screenshot"
+"Report Screenshot"
 
 PreRequisites
 ------
@@ -42,7 +43,7 @@ file `compare_inventory.py` and set the option `exclude_common=False`.
 To add new inventory please create the folder structure like as shown below
 ```
 project_environment
-#for example project1_prod/inentory 
+#for example project1_prod/inventory 
 
 #Sample inventory structure provided
 inventory/
@@ -66,9 +67,9 @@ that script to reflect your environment. The script assumes you have key based
 auth setup from the machine where you are trying to collect the data from, if
 not pass -k option to the ansible command and it will prompt for password.
 
-Once you run that script, the files should be stored locally on the machine
-under the right environment folder for example: we are comparing prod/preprod so check
-prod/preprod folder and it should look like below
+Once you run that script, ansible will collect the data and store the files locally on the machine
+under the right environment folder.
+For example: we are comparing prod/preprod so check prod/preprod folder and it should look like below
 ```
 prod/
 ├── prod_project1_prj1prapp01_rpmlist.log
@@ -91,7 +92,7 @@ preprod/
 └── preprod_project1_prj1pppgdb02_rpmlist.log
 
 ```
-The files are prefixed with environment/project/hostname so the data  can be identified properly.
+The files are prefixed with environment/project/hostname so the data can be identified properly.
 
 ##Generating Reports
 Create a script similar to the provided `DC_generate_project1_report.sh` to suit
@@ -103,9 +104,21 @@ your environment/project settings
 
 ```
 pass the 2 inventories for which you have collected data and it should generate the
-report under the reports folder, you can either copy it along with the css provided to
-a webserver and view it from there or run the `./start_webserver.sh` and it will
-start a simple python webserver on port 8000 from which you can view the generated report.
+report under the reports folder. As you can see below it has generated
+`DC_project1_prod-preprod_2016-03-13.html` file, similarly you should see a
+report for your project/environment/DC value.
+
+```
+reports/
+├── cuscosky.css
+├── DC_project1_prod-preprod_2016-03-13.html
+├── demo_screen.png
+└── start_webserver.sh
+```
+
+you can either copy it along with the css provided to a webserver and view
+it from there or run the `./start_webserver.sh` and it will start a simple 
+python webserver on port 8000 from which you can view the generated report.
 
 ###Todo
 * fix the logic which uses shell
