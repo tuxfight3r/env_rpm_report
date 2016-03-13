@@ -16,6 +16,9 @@ unique packages in each machine and thier common packages.
 https://github.com/tuxfight3r/env_rpm_report/raw/master/reports/demo_screen.png
 "Report Screenshot"
 
+[checkout the demo page
+here](http://htmlpreview.github.io/?https://github.com/tuxfight3r/env_rpm_report/blob/master/reports/DC_project1_prod-preprod_2016-03-13.html)
+
 PreRequisites
 ------
 * Ansible with Jinja2
