@@ -141,6 +141,34 @@ you can either copy it along with the css provided to a webserver and view
 it from there or run the `./start_webserver.sh` and it will start a simple 
 python webserver on port 8000 from which you can view the generated report.
 
+##Troubleshooting
+you can view what groups are seen by the compare inventory script by passing
+the inventories directly to the `common_libs.py`
+
+```
+./common_libs.py inventory/project1_prod/inventory 
+{
+    "appservers": {
+        "prj1prapp01": "192.168.1.130", 
+        "prj1prapp02": "192.168.1.131"
+    }, 
+    "dbservers": {
+        "prj1prpgdb01": "192.168.1.180", 
+        "prj1prpgdb02": "192.168.1.181"
+    }, 
+    "loadbalancers": {
+        "prj1prlban01": "192.168.1.10", 
+        "prj1prlban02": "192.168.1.11"
+    }, 
+    "webservers": {
+        "prj1prngnx01": "192.168.1.65", 
+        "prj1prngnx02": "192.168.1.66"
+    }
+}
+```
+it takes one inventory as input and shows the groups it sees and both the inventories
+you are passing to the main script should have identical groups.
+
 ###Todo
 * fix the logic which uses shell
 * provide support for other automation tools

@@ -30,7 +30,7 @@ def getGroupsFromInventory(ansible_inventory_file):
         elif "ansible_ssh_host" in line:
             host_var = re.split(r'[\t," "]+',line)
             hostname = host_var[0].split(".")[0]
-            #logic to accomodate idam inventory with aliases
+            #logic to accomodate ansible inventory with aliases
             ip_var = [item for item in host_var if "ansible_ssh_host" in item]
             ip=ip_var[0].split("=")[1]
             #print hostname, ip
