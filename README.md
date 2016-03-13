@@ -16,7 +16,7 @@ unique packages in each machine and thier common packages.
 https://github.com/tuxfight3r/env_rpm_report/raw/master/reports/demo_screen.png
 "Report Screenshot"
 
-[checkout the demo page
+[Checkout the Demo page
 here](http://htmlpreview.github.io/?https://github.com/tuxfight3r/env_rpm_report/blob/master/reports/DC_project1_prod-preprod_2016-03-13.html)
 
 PreRequisites
@@ -72,7 +72,7 @@ that script to reflect your environment. The script assumes you have key based
 auth setup from the machine where you are trying to collect the data from, if
 not pass -k option to the ansible command and it will prompt for password.
 
-```
+```bash
 #!/bin/bash
 
 ####PROJECT1####
@@ -94,7 +94,7 @@ ansible-playbook -i inventory/project1_prod/inventory fetch_rpmlist.yml -e
 Once you run that script, ansible will collect the data and store the files locally on the machine
 under the right environment folder.
 For example: we are comparing prod/preprod so check prod/preprod folder and it should look like below
-```
+```bash
 prod/
 ├── prod_project1_prj1prapp01_rpmlist.log
 ├── prod_project1_prj1prapp02_rpmlist.log
@@ -121,7 +121,7 @@ The files are prefixed with environment/project/hostname so the data can be iden
 ##Generating Reports
 Create a script similar to the provided `DC_generate_project1_report.sh` to suit
 your environment/project settings
-```
+```bash
 ##DC_generate_project1_report.sh 
 #!/bin/bash
 ./compare_inventory.py inventory/project1_prod/inventory inventory/project1_preprod/inventory DC
@@ -148,7 +148,7 @@ python webserver on port 8000 from which you can view the generated report.
 you can view what groups are seen by the compare inventory script by passing
 the inventories directly to the `common_libs.py`
 
-```
+```json
 ./common_libs.py inventory/project1_prod/inventory 
 {
     "appservers": {
