@@ -1,0 +1,26 @@
+# Environment file: PROJECT2 PROD
+#
+
+[load_balancers]
+prj2prlban01.prod.cloud.local ansible_ssh_host=192.168.3.10 keepalived_role=master
+prj2prlban02.prod.cloud.local ansible_ssh_host=192.168.3.11 keepalived_role=slave
+
+[web_servers]
+prj2prngnx01.prod.cloud.local ansible_ssh_host=192.168.3.65
+prj2prngnx02.prod.cloud.local ansible_ssh_host=192.168.3.66
+
+[app_servers]
+prj2prapp01.prod.cloud.local ansible_ssh_host=192.168.3.130
+prj2prapp02.prod.cloud.local ansible_ssh_host=192.168.3.131
+
+
+[db_servers]
+prj2prpgdb01.prod.cloud.local ansible_ssh_host=192.168.3.180
+prj2prpgdb02.prod.cloud.local ansible_ssh_host=192.168.3.181
+
+[project2]
+load_balancers
+web_servers
+app_servers
+db_servers
+

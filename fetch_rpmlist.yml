@@ -1,0 +1,14 @@
+---
+- hosts: all
+  gather_facts: yes
+  vars:
+    env_var: env
+    folder_path: "/home/ansible_user/rpm_comparison"
+    project: project
+
+  tasks:
+    - name: gather rpm list from the remote machine
+      shell: "rpm -qa | sort > /tmp/{{env_var}}_{{ansible_hostname}}_rpmlist.log"
+
+    - name: fetch the rpm list file and place it in local env folder
+      fetch: src="/tmp/{{env_var}}_{{inventory_hostname}}_rpmlist.log" dest="{{folder_path}}/{{env_var}}/{{env_var}}_{{project}}_{{ansible_hostname}}_rpmlist.log" flat=yes

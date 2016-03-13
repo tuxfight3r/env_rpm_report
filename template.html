@@ -1,0 +1,57 @@
+<html>
+<head>
+<title>{{title}}</title>
+<link rel="stylesheet" type="text/css" href="cuscosky.css">
+</head>
+<body bgcolor="#fffafa">
+<table style="width:75%" align="center">
+<br>
+<caption> {{title}}</caption>
+<br>
+<thead>
+<tr>
+<th>HOSTNAMES<br></th>
+<th>{{environment1}}<br></th>
+<th>{{environment2}}</th>
+<th>COMMON_PACKAGES</th>
+</tr>
+</thead>
+{#groups loop#}
+{% for keys in hash.iterkeys() %} 
+<tr>
+<td colspan="4" bgcolor="#b3f0ff"> <b>GROUP: {{keys}}</b> </td>
+</tr>
+{# hosts loop #}
+{% for item in hash[keys].iterkeys() %}
+<tr>
+<td>
+{% for host in item.split("_") %}
+<b>{{host}}</b><br>
+{% endfor %}
+</td>
+<td>
+{% for pkg1 in hash[keys][item].env1_array %}
+{{pkg1}} <br>
+{% endfor %}
+</td>
+<td>
+{% for pkg2 in hash[keys][item].env2_array %}
+{{pkg2}}<br>
+{% endfor %}
+</td>
+{# disable common packages by default #}
+{% if commonpkgs == True %}
+<td>common packages are excluded from report</td>
+{% else %}
+<td>
+{% for pkg3 in hash[keys][item].env_common %}
+{{pkg3}}<br>
+{% endfor %}
+</td>
+{% endif %}
+</tr>
+{% endfor %}
+{% endfor %}
+</table>
+</body>
+</html>
