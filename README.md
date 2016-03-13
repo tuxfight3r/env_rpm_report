@@ -3,7 +3,9 @@ RPM Comparison Report Between 2 Environments
 
 Overview
 ------
-This script will generate a RPM comparision report between 2 similar Environments like (prod/preprod) based on thier ansible inventories.
+This script will generate a RPM comparision report between 2 similar Environments
+like (prod/preprod) based on thier ansible inventories. The report shows the
+unique packages in each machine and thier common packages.
 
 **Note: This script will not work if you have mismatching group names in the ansible inventories.**
 
