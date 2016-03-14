@@ -4,8 +4,8 @@ RPM Comparison Report Between 2 Environments
 Overview
 ------
 This script will generate a RPM comparision report between 2 similar Environments
-like (prod/preprod) based on thier ansible inventories. The report shows the
-unique packages in each machine and thier common packages.
+like (prod/preprod) based on thier ansible inventories. The report will display
+what packages are unique in the two machines compared and whats common between them.
 
 **Note: This script will not work if you have mismatching group names in the ansible inventories.**
 
@@ -16,14 +16,14 @@ unique packages in each machine and thier common packages.
 https://github.com/tuxfight3r/env_rpm_report/raw/master/reports/demo_screen.png
 "Report Screenshot"
 
-[Checkout the Demo page
+[Checkout the demo page
 here](http://htmlpreview.github.io/?https://github.com/tuxfight3r/env_rpm_report/blob/master/reports/DC_project1_prod-preprod_2016-03-14.html)
 
 PreRequisites
 ------
 * Ansible with Jinja2
-* python2.6+
-* bash with coreutils installed
+* Python2.6+
+* Bash
 
 Usage
 ------
@@ -40,8 +40,8 @@ for production data.
 ```
 folder_path: "/home/ansible_user/env_rpm_report"
 ```
-The script by default ignore the common packages available in both machines
-from the report if you are interested in viewing it please change the
+The script by default ignores the common packages available in both machines
+from the report, if you are interested in viewing it please change the
 file `compare_inventory.py` and set the option `exclude_common=False`.
 
 ##Inventory Setup
