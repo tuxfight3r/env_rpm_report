@@ -7,11 +7,9 @@
 import json
 import sys
 import pprint
-import subprocess
 import datetime
 
 from common_libs import *
-from subprocess import Popen, PIPE, STDOUT
 
 #set the below parameter to False to include common packages in report
 exclude_common=True
@@ -46,32 +44,43 @@ for group in sorted(env1_hash.iterkeys()):
             #print outfile1, outfile2
             hostkey=var1+"_"+var2
             global_sort[group].update({hostkey:{}})
-    
+
             #created empty arrays inside hostkey
             for env in "env1_array", "env2_array", "env_common":
                 global_sort[group][hostkey][env]=[]
-           
-            #ugly hack for quick turn around / need pure python logic
-            command="./comm.sh %s/%s %s/%s" % (env1_path, outfile1, env2_path, outfile2)
-            #print command
-    
-            p = Popen(command, shell=True, stdin=PIPE, stdout=PIPE, stderr=STDOUT, close_fds=True)
-            output = p.stdout.read()
-            #print output
-            for line in output.split('\n'):
-                tabcount=len(line) - len(line.lstrip())
-                #print line, tabcount
-                line=line.replace("\t", "")
-                if tabcount == 0 and line.strip():
-                    global_sort[group][hostkey]["env1_array"].append(line)
-                elif tabcount == 1 and line.strip():
-                    global_sort[group][hostkey]["env2_array"].append(line)
+
+            #python logic to read 2 files and parse the array
+            file1 = "%s/%s" % (env1_path, outfile1)
+            file2 = "%s/%s" % (env2_path, outfile2)
+            #print file1, file2
+
+            try:
+                with open (file1,'r') as infile1, open(file2,'r')as infile2:
+                    list1=[line.strip('\n')for line in infile1.readlines()]
+                    list2=[line.strip('\n')for line in infile2.readlines()]
+            except IOError as e:
+                if not os.path.isfile(file1):
+                    filename=file1
+                    list1="Reading Failed: %s<br>Check File: %s" % (e.strerror,filename)
+                    list1=list1.split('\n')
+                elif not os.path.isfile(file2):
+                    filename=file2
+                    list2="Reading Failed: %s<br>Check File: %s" % (e.strerror,filename)
+                    list2=list2.split('\n')
                 else:
-                    global_sort[group][hostkey]["env_common"].append(line)
-    except: 
+                    pass
+
+                #list "Reading Failed: %s.Check Files: %s" % (e.strerror,filename)
+
+            (env1_array, env2_array, env_common) = compareArrayDiff(list1, list2)
+            global_sort[group][hostkey]["env1_array"]=env1_array
+            global_sort[group][hostkey]["env2_array"]=env2_array
+            global_sort[group][hostkey]["env_common"]=env_common
+
+    except:
        print "No Common Groups Found, Exiting.."
        sys.exit(2)
-       
+
 
 #    break
 #final_hash=pprint.pprint(global_sort,indent=1,width=2)

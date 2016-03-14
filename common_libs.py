@@ -11,7 +11,7 @@ import os
 
 from jinja2 import Environment, FileSystemLoader
  
-
+#read ansible inventory and give json output
 def getGroupsFromInventory(ansible_inventory_file):
 
     #Get groups from inventory file and add it to array. 
@@ -44,6 +44,7 @@ def getGroupsFromInventory(ansible_inventory_file):
     #Print output in json format.
     return json.dumps(groups_list,indent=4, sort_keys=True)
 
+#display usage and exit
 def usageExit():
     print """
     NOTE: program needs 3 parameters 2 similar ansible inventories and DataCenterID
@@ -55,12 +56,18 @@ def usageExit():
     """
     sys.exit(2)
 
+#take 2 arrays and give unique values in array1 & array2 and common in both
+def compareArrayDiff(array1,array2):
+    uniqin_array1=list(set(array1)-set(array2))
+    uniqin_array2=list(set(array2)-set(array1))
+    common_array=list(set(array1) & set (array2))
+    return uniqin_array1, uniqin_array2, common_array
 
+#generate the html report using jinja2
 def generateHtmlReport(title, env1, env2,global_sort,exclude_common):
     THIS_DIR=os.path.dirname(os.path.abspath(__file__))
     j2_env = Environment(loader=FileSystemLoader(THIS_DIR),trim_blocks=True)
     return j2_env.get_template('template.html').render(title=title,environment1=env1, environment2=env2, hash=global_sort, commonpkgs=exclude_common)
-
 
 
 if __name__ == "__main__":

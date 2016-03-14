@@ -17,7 +17,7 @@ https://github.com/tuxfight3r/env_rpm_report/raw/master/reports/demo_screen.png
 "Report Screenshot"
 
 [Checkout the Demo page
-here](http://htmlpreview.github.io/?https://github.com/tuxfight3r/env_rpm_report/blob/master/reports/DC_project1_prod-preprod_2016-03-13.html)
+here](http://htmlpreview.github.io/?https://github.com/tuxfight3r/env_rpm_report/blob/master/reports/DC_project1_prod-preprod_2016-03-14.html)
 
 PreRequisites
 ------
@@ -173,8 +173,7 @@ it takes one inventory as input and shows the groups it sees and both the invent
 you are passing to the main script should have identical groups.
 
 ###Todo
-* fix the logic which uses shell
-* provide support for other automation tools
+* Extend support for other automation tools if possible
 
 
 

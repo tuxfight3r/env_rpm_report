@@ -17,12 +17,12 @@
 </tr>
 </thead>
 {#groups loop#}
-{% for keys in hash.iterkeys() %} 
+{% for keys in hash.iterkeys()|sort() %} 
 <tr>
 <td colspan="4" bgcolor="#b3f0ff"> <b>GROUP: {{keys}}</b> </td>
 </tr>
 {# hosts loop #}
-{% for item in hash[keys].iterkeys() %}
+{% for item in hash[keys].iterkeys()|sort() %}
 <tr>
 <td>
 {% for host in item.split("_") %}
