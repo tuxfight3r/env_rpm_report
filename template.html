@@ -30,12 +30,12 @@
 {% endfor %}
 </td>
 <td>
-{% for pkg1 in hash[keys][item].env1_array %}
+{% for pkg1 in hash[keys][item].env1_array|sort() %}
 {{pkg1}} <br>
 {% endfor %}
 </td>
 <td>
-{% for pkg2 in hash[keys][item].env2_array %}
+{% for pkg2 in hash[keys][item].env2_array|sort() %}
 {{pkg2}}<br>
 {% endfor %}
 </td>
@@ -44,7 +44,7 @@
 <td>common packages are excluded from report</td>
 {% else %}
 <td>
-{% for pkg3 in hash[keys][item].env_common %}
+{% for pkg3 in hash[keys][item].env_common|sort() %}
 {{pkg3}}<br>
 {% endfor %}
 </td>
